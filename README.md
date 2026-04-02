@@ -1,4 +1,4 @@
-Demo: #https://drive.google.com/file/d/1YprjYkwFP1FZebE8gCe-dziEEipd802O/view?usp=drive_link
+Demo: #https://drive.google.com/file/d/1YprjYkwFP1FZebE8gCe-dziEEipd802O/view?usp=sharing
 # 💬 Real-Time Chat Application (Java + AI)
 
 A scalable real-time chat application built using Java, featuring private messaging, group chats, and secure JWT authentication.
