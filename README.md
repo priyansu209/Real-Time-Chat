@@ -1,59 +1,65 @@
-Demo: #https://drive.google.com/file/d/1YprjYkwFP1FZebE8gCe-dziEEipd802O/view?usp=sharing
-# 💬 Real-Time Chat Application (Java + AI)
+# Real-Time AI-Powered Chat Application
 
-A scalable real-time chat application built using Java, featuring private messaging, group chats, and secure JWT authentication.
+A modern, real-time chat application built with **Spring Boot** (Backend) and **React + Vite** (Frontend). It features secure private messaging via WebSockets, persistent chat history in MongoDB, JWT authentication, and AI-powered chat assistance using the Hugging Face API (Mistral).
 
-This application is enhanced with AI-powered features like chat summarization and automatic reply generation using Hugging Face APIs.
+## Quick Start Guide
 
----
+Follow these five easy steps to get the application up and running on your local machine. You can copy and paste the blocks below.
 
-## 🚀 Features
+### 1. Clone the repository
 
-### 🔐 Authentication
-- Secure login & signup using JWT
-- Token-based authorization
+```bash
+git clone https://github.com/priyansu209/Real-Time-Chat.git
+cd Real-Time-Chat
+```
 
-### 💬 Real-Time Messaging
-- One-to-one private messaging
-- Low-latency communication using WebSockets / Sockets
+### 2. Start the Database (MongoDB)
 
-### 👥 Group Chat
-- Create and manage chat groups
-- Real-time message broadcasting
+You need to have MongoDB running locally on port 27017. If you have Docker installed, you can quickly spin up a MongoDB instance using the following command:
 
-### 🧠 AI Features
-- Chat Summarization (summarizes long conversations)
-- Auto Reply Generation (suggests smart replies)
-- Uses Hugging Face Inference API
+```bash
+docker run -d -p 27017:27017 --name mongodb mongo
+```
+> If you have MongoDB installed locally, you can simply ensure the MongoDB service is running and skip the Docker command.
 
-### 🧵 Multithreading
-- Handles multiple clients simultaneously
+### 3. Configure the Backend
 
-### 🗄️ Database
-- Stores users, messages, and chat history
+The backend expects you to set down some critical configuration properties (like the Hugging Face API key for AI features and the JWT secret). Create or modify the `application.properties` in `backend/src/main/resources/` directory:
 
----
+```properties
+spring.application.name=backend
+server.port=8080
+spring.data.mongodb.uri=mongodb://localhost:27017/realtime_chat
+jwt.secret=5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437
+jwt.expiration=86400000
+huggingface.api.key=hf_YOUR_API_KEY_HERE
+huggingface.api.url=https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2
+```
 
-## 🛠️ Tech Stack
+### 4. Run the Backend
 
-- Backend: Java, Spring Boot
-- Authentication: JWT (JSON Web Tokens)
-- Real-Time Communication: WebSockets 
-- AI Integration: Hugging Face API
-- Database:  MongoDB
-- Build Tool: Maven 
+Open a new terminal, navigate to the `backend` folder, and clean-install your dependencies, then run the Spring Boot server:
 
----
+```bash
+cd backend
+./mvnw clean install
+./mvnw spring-boot:run
+```
+> Note: On Windows Command Prompt, use `mvnw` instead of `./mvnw`.
 
+### 5. Run the Frontend
 
-## 🧠 Future Improvements
+Open another terminal, navigate to the `frontend` folder, install Node dependencies, and start the Vite development server:
 
-- Voice messages + AI transcription  
-- Multi-language translation  
-- Chat sentiment analysis  
-- Mobile app integration  
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
----
+## Tech Stack Overview
 
-
-//Happy Building!!
+**Backend**: Java 17, Spring Boot, Spring Security (JWT), Spring Data MongoDB, Spring WebSockets (STOMP)
+**Frontend**: React 18, Vite, React Router, Axios, SockJS & STOMP client
+**Database**: MongoDB
+**AI Engine**: Hugging Face Inference API (Mistral-7B)
